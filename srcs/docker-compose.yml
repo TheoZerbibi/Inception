@@ -6,7 +6,7 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     volumes:
-      - $HOME/data/wordpress:/var/www/wordpress:rw
+      - $HOME/data/vol_mariadb:/var/www/wordpress:rw
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
       - NGINX_VOLUME_LOCATION=${NGINX_VOLUME_LOCATION}
@@ -15,17 +15,33 @@ services:
     networks:
       - default
       - intern
-  # web:
-  #   image: nginx:latest
-  #   container_name: nginx
-  #   restart: always
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   volumes:
-  #     - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
-  #     - ./requirements/nginx/conf/thzeribi.42.fr:/etc/nginx/sites-enabled/thzeribi.42.fr:ro
-  #     - ./requirements/nginx/www/:/var/www/:rw
+
+  mariadb:
+    image: inception:mariadb
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    volumes:
+      - $HOME/data/mariadb:/var/lib/mysql:rw
+    env_file:
+      - .env
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #   - MYSQL_USER=${MYSQL_USER}
+    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    #   - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+    expose:
+      - 3306
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "--host=localhost"]
+      start_period: 1m
+      interval: 5s
+      timeout: 2s
+      retries: 21
+    restart: always
 
 volumes:
   wordpress:
@@ -33,6 +49,12 @@ volumes:
     driver_opts:
       type: volume
       device: $HOME/data/wordpress
+      o: bind
+  mariadb:
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/mariadb
       o: bind
 
 networks:
