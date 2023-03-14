@@ -19,12 +19,15 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 	wp user create $WORDPRESS_USER $WORDPRESS_USER_EMAIL --user_pass=$WORDPRESS_USER_PASSWORD --role=author
 
 	echo "[i] Install darkelements theme."
-	wp theme install https://downloads.wordpress.org/theme/darkelements.7.3.zip
-	wp theme activate darkelements
+	wp theme install https://downloads.wordpress.org/theme/darkelements.7.3.zip --activate
 
-	echo "[i] Install Plugin wp-statistics for Grafana."
-	wp plugin install https://downloads.wordpress.org/plugin/wp-statistics.14.0.2.zip
-	wp plugin activate wp-statistics
+	sleep 5
+
+	echo "[i] Install Plugin wp-statistics and redis-cache for Grafana."
+	wp plugin install https://downloads.wordpress.org/plugin/wp-statistics.14.0.2.zip redis-cache --activate
+
+	echo "[i] Remove useless default plugin."
+	wp plugin delete akismet hello
 
 	echo
 	echo 'Wordpress init process done. Ready for start up.'

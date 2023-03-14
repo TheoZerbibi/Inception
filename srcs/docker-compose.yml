@@ -70,6 +70,8 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "cgi-fcgi", "-connect", "localhost:9000", "/status"]
       start_period: 1m
@@ -77,6 +79,24 @@ services:
       timeout: 2s
       retries: 21
     restart: always
+
+  redis:
+    image: inception:redis
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+      dockerfile: Dockerfile
+    ports:
+      - '6379:6379'
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      start_period: 1m
+      interval: 5s
+      timeout: 2s
+      retries: 21
+    networks:
+      - default
 
 networks:
     default:
