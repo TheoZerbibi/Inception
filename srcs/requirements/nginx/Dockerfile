@@ -20,6 +20,5 @@ RUN	apk update && \
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/thzeribi.42.fr /etc/nginx/conf.d/default.conf
-COPY www/index.html /var/www/wordpress/index.html
 
 ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]

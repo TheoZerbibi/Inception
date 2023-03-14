@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e -x
+
 if [ -d "/run/mysqld" ]; then
 	echo "[i] mysqld already present, skipping creation"
 	chown --recursive mysql:mysql /run/mysqld 

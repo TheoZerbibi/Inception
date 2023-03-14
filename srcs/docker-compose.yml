@@ -6,15 +6,17 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     volumes:
-      - $HOME/data/vol_mariadb:/var/www/wordpress:rw
+      - $HOME/data/wordpress:/var/www/wordpress:rw
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
-      - NGINX_VOLUME_LOCATION=${NGINX_VOLUME_LOCATION}
     ports:
       - '443:443'
     networks:
       - default
-      - intern
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    restart: always
 
   mariadb:
     image: inception:mariadb
@@ -41,9 +43,42 @@ services:
       retries: 21
     restart: always
 
+  wordpress:
+    image: inception:wordpress
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    volumes:
+      - $HOME/data/wordpress:/var/www/wordpress:rw
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_ADMIN_USER=${WORDPRESS_ADMIN_USER}
+      - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
+      - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_USER_PASSWORD=${WORDPRESS_USER_PASSWORD}
+      - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    expose:
+      - 9000
+    networks:
+      - default
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "cgi-fcgi", "-connect", "localhost:9000", "/status"]
+      start_period: 1m
+      interval: 5s
+      timeout: 2s
+      retries: 21
+    restart: always
+
 networks:
     default:
       name: inception
       driver: bridge
-    intern:
-        internal: true
