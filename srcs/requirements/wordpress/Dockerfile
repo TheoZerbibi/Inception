@@ -22,6 +22,5 @@ COPY scripts/init.sh /scripts/init.sh
 RUN chmod -R 755 /scripts
 
 EXPOSE 9000
-USER www-data
 
 ENTRYPOINT ["/scripts/init.sh"]

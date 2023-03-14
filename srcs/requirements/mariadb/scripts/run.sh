@@ -19,7 +19,7 @@ else
 
 	chown -R mysql:mysql /var/lib/mysql
 	mariadb-install-db --rpm --datadir=/var/lib/mysql > /dev/null
-	envsubst < tmp/setup_db.sql | mariadbd --bootstrap
+	envsubst < /scripts/init_db.sql | mariadbd --bootstrap
 
 	echo
 	echo 'MySQL init process done. Ready for start up.'

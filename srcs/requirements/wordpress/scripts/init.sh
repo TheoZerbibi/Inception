@@ -18,6 +18,14 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 	wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=$WORDPRESS_ADMIN_EMAIL
 	wp user create $WORDPRESS_USER $WORDPRESS_USER_EMAIL --user_pass=$WORDPRESS_USER_PASSWORD --role=author
 
+	echo "[i] Install darkelements theme."
+	wp theme install https://downloads.wordpress.org/theme/darkelements.7.3.zip
+	wp theme activate darkelements
+
+	echo "[i] Install Plugin wp-statistics for Grafana."
+	wp plugin install https://downloads.wordpress.org/plugin/wp-statistics.14.0.2.zip
+	wp plugin activate wp-statistics
+
 	echo
 	echo 'Wordpress init process done. Ready for start up.'
 	echo
