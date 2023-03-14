@@ -26,7 +26,4 @@ else
 	echo "exec mariadbd"
 fi
 
-echo "$MYSQL_ROOT_PASSWORD"
-echo "$MYSQL_USER"
-echo "$MYSQL_PASSWORD"
 exec mariadbd

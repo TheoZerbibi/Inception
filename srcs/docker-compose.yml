@@ -24,13 +24,11 @@ services:
       dockerfile: Dockerfile
     volumes:
       - $HOME/data/mariadb:/var/lib/mysql:rw
-    env_file:
-      - .env
-    # environment:
-    #   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    #   - MYSQL_USER=${MYSQL_USER}
-    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    #   - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
     expose:
       - 3306
     networks:
@@ -42,20 +40,6 @@ services:
       timeout: 2s
       retries: 21
     restart: always
-
-volumes:
-  wordpress:
-    driver: local
-    driver_opts:
-      type: volume
-      device: $HOME/data/wordpress
-      o: bind
-  mariadb:
-    driver: local
-    driver_opts:
-      type: volume
-      device: $HOME/data/mariadb
-      o: bind
 
 networks:
     default:
