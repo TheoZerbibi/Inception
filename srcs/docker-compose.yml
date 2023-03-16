@@ -86,8 +86,8 @@ services:
     build:
       context: ./requirements/bonus/redis
       dockerfile: Dockerfile
-    ports:
-      - '6379:6379'
+    expose:
+      - '6379'
     restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -97,6 +97,12 @@ services:
       retries: 21
     networks:
       - default
+
+  # redis:
+  #   image: redis:7
+  #   container_name: redis
+  #   networks:
+  #     - default
 
 networks:
     default:
