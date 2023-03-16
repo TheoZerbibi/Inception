@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e -x
+set -x
 
 if [ -z "$(ls -A /var/www/wordpress)" ]; then
 	echo "[i] Wordpress not found, start dowloading."
