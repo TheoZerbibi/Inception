@@ -113,6 +113,21 @@ services:
         condition: service_healthy
     restart: always
 
+  grafana:
+    image: inception:grafana
+    container_name: grafana
+    build:
+      context: ./requirements/bonus/grafana
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    networks:
+      - default
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    restart: always
+
 networks:
     default:
       name: inception
