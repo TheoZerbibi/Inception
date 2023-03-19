@@ -13,10 +13,9 @@ RUN	apk update && \
 	chmod 755 -R usr/src/app/info/
 
 COPY ./site /tmp/site
-COPY ./scripts/run.sh /tmp
-RUN chmod a+x /tmp/run.sh
+COPY ./scripts/run.sh /scripts/run.sh
+RUN chmod a+x /scripts/run.sh
 
 WORKDIR /usr/src/app/info/
 
-ENTRYPOINT ["/tmp/run.sh"]
-# ENTRYPOINT [ "tail", "-f", "/dev/null" ]
+ENTRYPOINT ["/scripts/run.sh"]

@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - $HOME/data/wordpress:/var/www/wordpress:rw
+      - $HOME/data/portfolio:/var/www/portfolio:rw
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
     ports:
@@ -19,6 +20,8 @@ services:
       adminer:
         condition: service_started
       info:
+        condition: service_started
+      portfolio:
         condition: service_started
     restart: always
 
@@ -146,6 +149,18 @@ services:
       - default
     volumes:
       - $HOME/data/info:/usr/src/app/info/:rw
+    restart: always
+
+  portfolio:
+    image: inception:porfolio
+    container_name: portfolio
+    build:
+      context: ./requirements/bonus/portfolio
+      dockerfile: Dockerfile
+    networks:
+      - default
+    volumes:
+      - $HOME/data/portfolio:/var/www/portfolio:rw
     restart: always
 
 networks:
