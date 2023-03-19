@@ -19,7 +19,7 @@ services:
         condition: service_healthy
       adminer:
         condition: service_started
-      static:
+      info:
         condition: service_started
     restart: always
 
@@ -118,29 +118,27 @@ services:
         condition: service_healthy
     restart: always
 
-  grafana:
-    image: inception:grafana
-    container_name: grafana
-    build:
-      context: ./requirements/bonus/grafana
-      dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
-    networks:
-      - default
-    depends_on:
-      wordpress:
-        condition: service_healthy
-    restart: always
+  # grafana:
+  #   image: inception:grafana
+  #   container_name: grafana
+  #   build:
+  #     context: ./requirements/bonus/grafana
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '3000:3000'
+  #   networks:
+  #     - default
+  #   depends_on:
+  #     wordpress:
+  #       condition: service_healthy
+  #   restart: always
 
-  static:
-    image: inception:static
-    container_name: static
+  info:
+    image: inception:info
+    container_name: info
     build:
-      context: ./requirements/bonus/static
+      context: ./requirements/bonus/info
       dockerfile: Dockerfile
-    ports:
-      - '4242:4242'
     environment:
       - PROXY_URL=${PROXY_URL}
       - PROXY_PASSWORD=${PROXY_PASSWORD}

@@ -1,5 +1,5 @@
-upstream 42info {
-	server 42info:4242;
+upstream info {
+	server info:4242;
 }
 
 server {
@@ -34,6 +34,6 @@ server {
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection "Upgrade";
 
-		proxy_pass http://42info/;
+		proxy_pass http://info/;
 	}
 }
