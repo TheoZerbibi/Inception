@@ -1,0 +1,50 @@
+body {
+	background-color : #2e2e2e;
+	color : white;
+	padding: 1rem;
+}
+
+.global {
+	display: flex;
+}
+
+img {
+	width: 31rem;
+	height: 30rem;
+	padding-right: 2rem;
+	padding-bottom: 2rem;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.location, .bh, .projects, .logtime {
+	margin-bottom: 1rem;
+}
+
+.projects span[finished] {
+	color: lime;
+}
+
+.projects span[failed] {
+	color: red;
+}
+
+.projects span[in_progress] {
+	color: orange;
+}
+
+.projects span[waiting_for_correction]{
+	color: purple;
+}
+
+.logtime {
+	color: #ffadad;
+	text-align: justify;
+}
+
+pre {
+	color: white;
+}

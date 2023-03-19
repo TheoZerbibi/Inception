@@ -1,0 +1,49 @@
+<DOCTYPE html>
+	<html>
+		<head>
+			<title>42 Info - <%- user.login %></title>
+			
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+			<meta http-equiv="x-ua-compatible" content="ie=edge">
+			<meta name="description" content="42 Info">
+			<link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+			<link rel="stylesheet" type="text/css" href="css/info.css" />
+		</head>
+		<body>
+			<form action="/info" method="POST">
+				<input type="text" name="login"/>
+				<input type="submit" value="Change student"/>
+			</form>
+			<div class="global">
+				<div>
+					<img src="<%- user.image.link %>" width="20%"/>
+					<div class="logtime">
+						<center>
+							<% if (user.location) { %>
+								<h2><%- user.location %></h2>
+							<% } else { %>
+								<h2>"Not log"</h2>
+							<% } %>
+						</center>
+					</div>
+				</div>
+				<div class="content">
+					<div class="projects">
+						<% for (var i = 0; i < user.projects_users.length; i++) {%>
+							<% if (user.projects_users[i].cursus_ids == 21) {%>
+								<p><%- user.projects_users[i].project.name %> - 
+								<span <%- user.projects_users[i].status %>>
+									<%- user.projects_users[i].status %>
+								</span>
+								<% if (!user.projects_users[i].status.includes("in_progress", "waiting_for_correction")) {%>
+									[<%- user.projects_users[i].final_mark %> /100]
+								<% } %>
+								<br />
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
