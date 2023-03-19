@@ -7,7 +7,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - $HOME/data/wordpress:/var/www/wordpress:rw
-      - $HOME/data/wordpress:/var/www/perso:rw
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
     ports:
@@ -142,8 +141,11 @@ services:
     environment:
       - PROXY_URL=${PROXY_URL}
       - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - INFO_PASSWORD=${INFO_PASSWORD}
     networks:
       - default
+    volumes:
+      - $HOME/data/info:/usr/src/app/info/:rw
     restart: always
 
 networks:

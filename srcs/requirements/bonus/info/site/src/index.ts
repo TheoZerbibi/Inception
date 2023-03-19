@@ -12,7 +12,6 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-// in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let	isLog:boolean = false;
@@ -42,7 +41,7 @@ app.post('/info', async (req:any, res:any) => {
 });
 
 app.post('/', async (req:any, res:any) => {
-	if (req.body.password && req.body.password == "42Cursus")
+	if (req.body.password && req.body.password == process.env.INFO_PASSWORD)
 	{
 		isLog = true;
 		await getData(login);

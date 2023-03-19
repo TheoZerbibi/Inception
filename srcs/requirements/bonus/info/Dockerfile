@@ -4,16 +4,19 @@ LABEL maintainer="Theo ZERIBI <thzeribi@student.42.fr>"
 
 RUN	apk update && \
 	apk upgrade && \
-	apk add --update nodejs npm yarn && \
+	apk add --update nodejs npm yarn shadow && \
 	npm install -g npm@latest pnpm typescript && \
-	mkdir -p /usr/src/app/info
+	mkdir -p /usr/src/app/info/ && \
+	groupmod www-data && \
+	useradd --home-dir /home/www-data --create-home --no-user-group --system www-data && \
+	chown --recursive www-data:www-data usr/src/app/info/ && \
+	chmod 755 -R usr/src/app/info/
 
-COPY site/package.json /usr/src/app/info/package.json
-
-RUN cd /usr/src/app/info/ && pnpm install
-
-COPY ./site /usr/src/app/info/
+COPY ./site /tmp/site
+COPY ./scripts/run.sh /tmp
+RUN chmod a+x /tmp/run.sh
 
 WORKDIR /usr/src/app/info/
 
-ENTRYPOINT ["pnpm", "start"]
+ENTRYPOINT ["/tmp/run.sh"]
+# ENTRYPOINT [ "tail", "-f", "/dev/null" ]
