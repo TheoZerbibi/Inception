@@ -2,3 +2,6 @@
 
 .vscode/
 clean.sh
+node_modules/
+.pnpm-store/
+pnpm-lock.yaml
