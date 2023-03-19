@@ -17,6 +17,10 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
+      adminer:
+        condition: service_started
+      static:
+        condition: service_started
     restart: always
 
   mariadb:
@@ -106,7 +110,7 @@ services:
       context: ./requirements/bonus/adminer
       dockerfile: Dockerfile
     ports:
-      - '7077:7077'
+      - '7077'
     networks:
       - default
     depends_on:
@@ -135,10 +139,11 @@ services:
     build:
       context: ./requirements/bonus/static
       dockerfile: Dockerfile
-    volumes:
-      - ./requirements/bonus/static/site:/usr/src/app/static
     ports:
       - '4242:4242'
+    environment:
+      - PROXY_URL=${PROXY_URL}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
     networks:
       - default
     restart: always

@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import bodyParser from 'body-parser';
 import { curly } from 'node-libcurl';
+import * as dotenv from "dotenv";
 
 const app = express();
 const port = 4242;
@@ -51,7 +52,7 @@ app.post('/', async (req:any, res:any) => {
 
 async function getData(_login:string)
 {
-	await curly.get(`https://proxy42.tzeribi.fr/api/users/${_login}`, {httpHeader: ['Authorization: 3Bj4v5*paNhJ',]}).then(async (response) => {
+	await curly.get(`${process.env.PROXY_URL}/users/${_login}`, {httpHeader: [`Authorization: ${process.env.PROXY_PASSWORD}`,]}).then(async (response:any) => {
 		if (response.statusCode != 200) {
 			login = 'norminet';
 			await getData(login);
@@ -62,5 +63,5 @@ async function getData(_login:string)
 
 
 app.listen(port, () => {
-	console.log(`server started at http://localhost:${port}`);
+	console.log(`server started at https://info.42.fr`);
 });
