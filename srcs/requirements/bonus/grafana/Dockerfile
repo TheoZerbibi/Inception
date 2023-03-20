@@ -4,6 +4,8 @@ LABEL maintainer="Theo ZERIBI <thzeribi@student.42.fr>"
 
 ENV GRAFANA_VERSION=9.4.3
 
+ARG GRAFANA_USER=GRAFANA_USER
+
 RUN mkdir /tmp/grafana \
 	&& wget -P /tmp/ https://dl.grafana.com/oss/release/grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz \
 	&& tar xfz /tmp/grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz --strip-components=1 -C /tmp/grafana
@@ -14,7 +16,8 @@ ENV PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bi
 	GF_PATHS_HOME="/usr/share/grafana" \
 	GF_PATHS_LOGS="/var/log/grafana" \
 	GF_PATHS_PLUGINS="/var/lib/grafana/plugins" \
-	GF_PATHS_PROVISIONING="/etc/grafana/provisioning"
+	GF_PATHS_PROVISIONING="/etc/grafana/provisioning" \
+	GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
 
 WORKDIR $GF_PATHS_HOME
 

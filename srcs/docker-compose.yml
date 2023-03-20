@@ -137,6 +137,9 @@ services:
     depends_on:
       prometheus:
         condition: service_started
+    environment:
+      - GRAFANA_USER=${GRAFANA_USER}
+      - GRAFANA_USER_PASSWORD=${GRAFANA_USER_PASSWORD}
     restart: always
 
   prometheus:
