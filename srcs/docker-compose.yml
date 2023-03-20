@@ -128,8 +128,8 @@ services:
     build:
       context: ./requirements/bonus/grafana
       dockerfile: Dockerfile
-    volumes:
-      - $HOME/data/prometheus:/var/lib/prometheus:rw
+      args:
+      - GRAFANA_USER=${GRAFANA_USER}
     expose:
       - '3000'
     networks:
@@ -140,6 +140,42 @@ services:
     environment:
       - GRAFANA_USER=${GRAFANA_USER}
       - GRAFANA_USER_PASSWORD=${GRAFANA_USER_PASSWORD}
+      - PROMETHEUS_HOST=${PROMETHEUS_HOST}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+    volumes:
+      - $HOME/data/grafana:/etc/grafana/provisioning:rw
+    restart: always
+
+  cadvisor:
+    image: inception:cadvisor
+    container_name: cadvisor
+    build:
+      context: ./requirements/bonus/cadvisor
+      dockerfile: Dockerfile
+    expose:
+      - '8080'
+    networks:
+      - default
+    depends_on:
+      prometheus:
+        condition: service_started
+    environment:
+      - PROMETHEUS_HOST=${PROMETHEUS_HOST}
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/healthz"]
+      start_period: 1m
+      interval: 30s
+      timeout: 3s
+      retries: 21
     restart: always
 
   prometheus:

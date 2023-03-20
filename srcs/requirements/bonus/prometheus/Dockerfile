@@ -26,7 +26,7 @@ COPY conf/prometheus.yml /etc/prometheus/
 COPY conf/alert.rules /etc/prometheus/
 
 EXPOSE 9090
-# ENTRYPOINT [ "tail", "-f", "/dev/null" ]
+
 ENTRYPOINT /usr/local/bin/prometheus \ 
             --config.file /etc/prometheus/prometheus.yml \ 
             --storage.tsdb.path /var/lib/prometheus/ \

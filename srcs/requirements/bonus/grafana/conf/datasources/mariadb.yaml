@@ -1,0 +1,14 @@
+apiVersion: 1
+
+datasources:
+  - name: MariaDB
+    type: mysql
+    url: ${MYSQL_HOST}
+    user: ${MYSQL_USER}
+    jsonData:
+      database: ${WORDPRESS_DB_NAME}
+      maxOpenConns: 0
+      maxIdleConns: 2
+      connMaxLifetime: 14400
+    secureJsonData:
+      password: ${MYSQL_USER_PASSWORD}

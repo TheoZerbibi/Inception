@@ -26,19 +26,18 @@
 	"fiscalYearStartMonth": 0,
 	"gnetId": 13191,
 	"graphTooltip": 0,
-	"id": 1,
+	"id": 4,
 	"links": [],
 	"liveNow": false,
 	"panels": [
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
 			"custom": {
-			  "align": "auto",
 			  "cellOptions": {
 				"type": "auto"
 			  },
@@ -135,7 +134,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -196,7 +195,7 @@
 		},
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fontSize": "120%",
 		"format": "short",
@@ -225,7 +224,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "time_series",
@@ -275,7 +274,7 @@
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
@@ -322,7 +321,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -375,7 +374,7 @@
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
@@ -457,7 +456,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -513,7 +512,7 @@
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
@@ -560,7 +559,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -613,7 +612,7 @@
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
@@ -703,7 +702,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -759,12 +758,11 @@
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
 			"custom": {
-			  "align": "auto",
 			  "cellOptions": {
 				"type": "auto"
 			  },
@@ -861,7 +859,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -915,7 +913,7 @@
 	  {
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fieldConfig": {
 		  "defaults": {
@@ -962,7 +960,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "table",
@@ -1021,7 +1019,7 @@
 		},
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fontSize": "120%",
 		"format": "none",
@@ -1050,7 +1048,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "time_series",
@@ -1110,7 +1108,7 @@
 		"dashes": false,
 		"datasource": {
 		  "type": "mysql",
-		  "uid": "Xj-wfzBVz"
+		  "uid": "P2ABB19EC46770D68"
 		},
 		"fill": 2,
 		"fillGradient": 0,
@@ -1159,7 +1157,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"editorMode": "code",
 			"format": "time_series",
@@ -1209,7 +1207,7 @@
 		  {
 			"datasource": {
 			  "type": "mysql",
-			  "uid": "Xj-wfzBVz"
+			  "uid": "P2ABB19EC46770D68"
 			},
 			"format": "time_series",
 			"group": [],
@@ -1305,6 +1303,6 @@
 	"timezone": "",
 	"title": "Wordpress Static",
 	"uid": "wckvJzOMk",
-	"version": 9,
+	"version": 2,
 	"weekStart": ""
   }
