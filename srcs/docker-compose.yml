@@ -23,6 +23,8 @@ services:
         condition: service_started
       portfolio:
         condition: service_started
+      grafana:
+        condition: service_started
     restart: always
 
   mariadb:
@@ -111,7 +113,7 @@ services:
     build:
       context: ./requirements/bonus/adminer
       dockerfile: Dockerfile
-    ports:
+    expose:
       - '7077'
     networks:
       - default
@@ -126,13 +128,15 @@ services:
     build:
       context: ./requirements/bonus/grafana
       dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
+    volumes:
+      - $HOME/data/prometheus:/var/lib/prometheus:rw
+    expose:
+      - '3000'
     networks:
       - default
     depends_on:
-      wordpress:
-        condition: service_healthy
+      prometheus:
+        condition: service_started
     restart: always
 
   prometheus:
@@ -141,8 +145,10 @@ services:
     build:
       context: ./requirements/bonus/prometheus
       dockerfile: Dockerfile
-    ports:
-      - "9090:9090"
+    volumes:
+      - $HOME/data/prometheus:/var/lib/prometheus:rw
+    expose:
+      - "9090"
     networks:
       - default
     restart: always
@@ -157,9 +163,9 @@ services:
       - FTP_USER=${FTP_USER}
       - FTP_PASSWORD=${FTP_PASSWORD}
     volumes:
-      - $HOME/data/wordpress:/home/${FTP_USER}/wordpress
-      - $HOME/data/portfolio:/home/${FTP_USER}/portfolio
-      - $HOME/data/info:/home/${FTP_USER}/info
+      - $HOME/data/wordpress:/home/${FTP_USER}/wordpress:rw
+      - $HOME/data/portfolio:/home/${FTP_USER}/portfolio:rw
+      - $HOME/data/info:/home/${FTP_USER}/info:rw
     depends_on:
       wordpress:
         condition: service_healthy

@@ -23,5 +23,6 @@ COPY conf/thzeribi.42.fr /etc/nginx/conf.d/default.conf
 COPY conf/adminer.42.fr /etc/nginx/sites-enabled/adminer.42.fr
 COPY conf/info.42.fr /etc/nginx/sites-enabled/info.42.fr
 COPY conf/portfolio.thzeribi.fr /etc/nginx/sites-enabled/portfolio.thzeribi.fr
+COPY conf/grafana.thzeribi.fr /etc/nginx/sites-enabled/grafana.thzeribi.fr
 
 ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
