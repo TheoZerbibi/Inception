@@ -16,7 +16,9 @@ if [ ! -f "/etc/vsftpd.userlist" ]; then
 	useradd -m -s /bin/bash $FTP_USER
 	echo $FTP_USER > /etc/vsftpd.userlist
 	echo "$FTP_USER:$FTP_PASSWORD" | /usr/sbin/chpasswd &> /dev/null
-	chown -R $FTP_USER:$FTP_USER /home
+	chown -R $FTP_USER:$FTP_USER /home/portfolio
+	chown -R $FTP_USER:$FTP_USER /home/info
+	usermod -g www-data $FTP_USER
 
 	echo
 	echo 'VSFTPD init process done. Ready for start up.'

@@ -34,8 +34,7 @@ define( "WP_REDIS_HOST", "redis");' /var/www/wordpress/wp-config.php
 	wp plugin delete akismet hello
 
 	chown -R www-data:www-data /var/www/wordpress/
-
-
+	chmod -R 775 /var/www/wordpress/
 	echo
 	echo 'Wordpress init process done. Ready for start up.'
 	echo
