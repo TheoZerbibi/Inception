@@ -6,7 +6,7 @@
 #    By: thzeribi <thzeribi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/19 12:13:48 by thzeribi          #+#    #+#              #
-#    Updated: 2023/03/20 11:41:49 by thzeribi         ###   ########.fr        #
+#    Updated: 2023/03/20 11:48:16 by thzeribi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ clean:
 fclean:
 	${COMPOSE} down --rmi all --volumes
 	docker system prune -af
-	rm -rf ${DATA_DIR}/*
+	sudo rm -rf ${DATA_DIR}/*
 
 .PHONY: re
 re: clean all
