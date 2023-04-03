@@ -205,6 +205,7 @@ services:
       - wordpress:/home/${FTP_USER}/wordpress:rw
       - portfolio:/home/${FTP_USER}/portfolio:rw
       - info:/home/${FTP_USER}/info:rw
+      - grafana:/home/${FTP_USER}/grafana:rw
     depends_on:
       wordpress:
         condition: service_healthy

@@ -9,6 +9,7 @@ if [ ! -f "/etc/vsftpd.userlist" ]; then
 	mkdir -p /home/wordpress
 	mkdir -p /home/info
 	mkdir -p /home/portfolio
+	mkdir -p /home/grafana
 
 	mv /var/www/vsftpd.conf /etc/vsftpd.conf
 
@@ -18,6 +19,7 @@ if [ ! -f "/etc/vsftpd.userlist" ]; then
 	echo "$FTP_USER:$FTP_PASSWORD" | /usr/sbin/chpasswd &> /dev/null
 	chown -R $FTP_USER:$FTP_USER /home/portfolio
 	chown -R $FTP_USER:$FTP_USER /home/info
+	chown -R $FTP_USER:$FTP_USER /home/grafana
 	usermod -g www-data $FTP_USER
 
 	echo
