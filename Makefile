@@ -6,7 +6,7 @@
 #    By: thzeribi <thzeribi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/19 12:13:48 by thzeribi          #+#    #+#              #
-#    Updated: 2023/04/03 06:20:18 by thzeribi         ###   ########.fr        #
+#    Updated: 2023/04/03 07:33:35 by thzeribi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ VOLUMES			:=	${addprefix ${DATA}/,	\
 						info				\
 						grafana				\
 						prometheus			\
-						
 					}
 
 ################################################################################
@@ -80,13 +79,13 @@ clean:
 fclean:
 	${COMPOSE} down --rmi all --volumes
 	docker system prune -af
-	sudo rm -rf ${addsuffix /*, ${VOLUMES}}
+	sudo rm -rf ${VOLUMES}
 
 .PHONE: create_dir
 create_dir:
 	mkdir -p ${VOLUMES}
 
 .PHONY: re
-re: clean all
+re: fclean all
 
 -include ./Templates/header.mk
