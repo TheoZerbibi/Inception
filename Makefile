@@ -6,7 +6,7 @@
 #    By: thzeribi <thzeribi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/19 12:13:48 by thzeribi          #+#    #+#              #
-#    Updated: 2023/03/20 11:48:16 by thzeribi         ###   ########.fr        #
+#    Updated: 2023/04/03 06:20:18 by thzeribi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,16 @@ PROJECT_NAME		:=	Inception
 ################################################################################
 SOURCES_FOLDER	:=	./srcs/
 COMPOSE			:=	docker compose --project-directory ${SOURCES_FOLDER}
-DATA_DIR		:=	${HOME}/data
+DATA			:=	${HOME}/data
+VOLUMES			:=	${addprefix ${DATA}/,	\
+						wordpress			\
+						mariadb				\
+						portfolio			\
+						info				\
+						grafana				\
+						prometheus			\
+						
+					}
 
 ################################################################################
 #                                 COLORS                                       #
@@ -48,11 +57,11 @@ OBJ_COLOR		:=	\033[0;36m
 all: header up
 
 .PHONY: up
-up:
+up: create_dir build create
 	${COMPOSE} up -d
 
-.PHONY: stop down
-stop down:
+.PHONY: stop down build create
+stop down build create:
 	${COMPOSE} $@
 
 .PHONY: exec
@@ -71,7 +80,11 @@ clean:
 fclean:
 	${COMPOSE} down --rmi all --volumes
 	docker system prune -af
-	sudo rm -rf ${DATA_DIR}/*
+	sudo rm -rf ${addsuffix /*, ${VOLUMES}}
+
+.PHONE: create_dir
+create_dir:
+	mkdir -p ${VOLUMES}
 
 .PHONY: re
 re: clean all

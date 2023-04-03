@@ -6,8 +6,8 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     volumes:
-      - $HOME/data/wordpress:/var/www/wordpress:rw
-      - $HOME/data/portfolio:/var/www/portfolio:rw
+      - wordpress:/var/www/wordpress:rw
+      - portfolio:/var/www/portfolio:rw
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
     ports:
@@ -34,7 +34,7 @@ services:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     volumes:
-      - $HOME/data/mariadb:/var/lib/mysql:rw
+      - mariadb:/var/lib/mysql:rw
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
@@ -59,7 +59,7 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
-      - $HOME/data/wordpress:/var/www/wordpress:rw
+      - wordpress:/var/www/wordpress:rw
     environment:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}
@@ -146,7 +146,7 @@ services:
       - MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
     volumes:
-      - $HOME/data/grafana:/etc/grafana/provisioning:rw
+      - grafana:/etc/grafana/provisioning:rw
     restart: always
 
   cadvisor:
@@ -185,7 +185,7 @@ services:
       context: ./requirements/bonus/prometheus
       dockerfile: Dockerfile
     volumes:
-      - $HOME/data/prometheus:/var/lib/prometheus:rw
+      - prometheus:/var/lib/prometheus:rw
     expose:
       - "9090"
     networks:
@@ -202,9 +202,9 @@ services:
       - FTP_USER=${FTP_USER}
       - FTP_PASSWORD=${FTP_PASSWORD}
     volumes:
-      - $HOME/data/wordpress:/home/${FTP_USER}/wordpress:rw
-      - $HOME/data/portfolio:/home/${FTP_USER}/portfolio:rw
-      - $HOME/data/info:/home/${FTP_USER}/info:rw
+      - wordpress:/home/${FTP_USER}/wordpress:rw
+      - portfolio:/home/${FTP_USER}/portfolio:rw
+      - info:/home/${FTP_USER}/info:rw
     depends_on:
       wordpress:
         condition: service_healthy
@@ -232,7 +232,7 @@ services:
     networks:
       - default
     volumes:
-      - $HOME/data/info:/usr/src/app/info/:rw
+      - info:/usr/src/app/info/:rw
     restart: always
 
   portfolio:
@@ -244,10 +244,59 @@ services:
     networks:
       - default
     volumes:
-      - $HOME/data/portfolio:/var/www/portfolio:rw
+      - portfolio:/var/www/portfolio:rw
     restart: always
 
 networks:
     default:
       name: inception
       driver: bridge
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/wordpress
+      o: bind
+
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/mariadb
+      o: bind
+
+  portfolio:
+    name: portfolio
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/portfolio
+      o: bind
+
+  info:
+    name: info
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/info
+      o: bind
+
+  grafana:
+    name: grafana
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/grafana
+      o: bind
+
+  prometheus:
+    name: prometheus
+    driver: local
+    driver_opts:
+      type: volume
+      device: $HOME/data/prometheus
+      o: bind
