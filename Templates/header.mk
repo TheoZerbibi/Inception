@@ -6,7 +6,7 @@
 #    By: thzeribi <thzeribi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/26 01:52:22 by thzeribi          #+#    #+#              #
-#    Updated: 2023/03/20 11:21:51 by thzeribi         ###   ########.fr        #
+#    Updated: 2023/04/08 12:35:20 by thzeribi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ define print_header
 	printf "\033[m$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tName:	$(OBJ_COLOR)%$(SPACE)s %b\033[m" "$(PROJECT_NAME)" "$(INFO_COLOR)||\n"
 	printf "$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tAuthor:	$(OBJ_COLOR)%$(SPACE)s %b\033[m" "$(AUTHOR)" "$(INFO_COLOR)||\n"
 	printf "$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tDate: 	$(OBJ_COLOR)%$(SPACE)s %b\033[m" "$(DATE)" "$(INFO_COLOR)||\n"
-	printf "$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tCC: 	$(OBJ_COLOR)%-$(SPACE)s %b\033[m" "$(CC)" "$(INFO_COLOR)||\n"
+	printf "$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tCC: 	$(OBJ_COLOR)%-$(SPACE)s %b\033[m" "docker-compose" "$(INFO_COLOR)||\n"
 	printf "$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tFlags: 	$(OBJ_COLOR)%$(SPACE).48s %b\033[m" "$(CFLAGS)" "$(INFO_COLOR)||\n"
 	[ "${RULE}" ] && printf "$(INFO_COLOR)|| $(OK_COLOR)\t\t\t\tRule:$(OBJ_COLOR)   %-$(SPACE)s %b\033[m" "$(RULE)" "$(INFO_COLOR)||\n"; \
 	echo "$(INFO_COLOR)||                                                                                          ||";

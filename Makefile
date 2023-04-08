@@ -6,7 +6,7 @@
 #    By: thzeribi <thzeribi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/19 12:13:48 by thzeribi          #+#    #+#              #
-#    Updated: 2023/04/03 07:33:35 by thzeribi         ###   ########.fr        #
+#    Updated: 2023/04/08 12:35:08 by thzeribi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ ifndef VERBOSE
 	MAKEFLAGS += --no-print-directory --silent
 endif
 
-NAME				:=	cub3D
 PROJECT_NAME		:=	Inception
 
 ################################################################################
@@ -83,7 +82,7 @@ fclean:
 
 .PHONE: create_dir
 create_dir:
-	mkdir -p ${VOLUMES}
+	mkdir -p ${VOLUMES}	
 
 .PHONY: re
 re: fclean all
